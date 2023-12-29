@@ -9,8 +9,11 @@ services:
       - "4000:4000"
     environment:
       - DB_URL=postgresql://postgres:postgres@flask_db:5432/postgres
+    restart: always
     depends_on:
-      - flask_db
+      flask_db:
+        condition: service_healthy
+    
   flask_db:
     container_name: flask_db
     image: postgres:12
@@ -22,6 +25,11 @@ services:
       - POSTGRES_DB=postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   pgdata: {}
