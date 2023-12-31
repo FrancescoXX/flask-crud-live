@@ -1,0 +1,20 @@
+name: Sarthi Preview Environments
+on:
+  pull_request:
+  push:
+
+jobs:
+  sarthi_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Sarthi
+        uses: tushar5526/sarthi-deploy@main
+        with:
+          compose_file: docker-compose.yml # override this with the compose file name
+          sarthi_server_url: 'http://3.106.244.196:5000'
+          sarthi_secret: 'random_secure_text_for_auth' # Secret text generate while setting up the server
+          fork_repo_url: ${{ github.event.pull_request.head.repo.full_name }}
+          GITHUB_TOKEN: ${{ github.token }}
