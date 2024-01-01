@@ -1,6 +1,7 @@
 name: Sarthi Preview Environments
 on:
   pull_request:
+    types: [ opened, closed]
   push:
 
 jobs:
