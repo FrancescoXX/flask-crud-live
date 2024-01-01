@@ -11,10 +11,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up Sarthi
-        uses: tushar5526/sarthi-deploy@main
+        uses: tushar5526/sarthi-deploy@delete-preview
         with:
           compose_file: docker-compose.yml # override this with the compose file name
           sarthi_server_url: 'http://3.106.244.196:5000'
           sarthi_secret: 'KZ9UVsfT7D6KXQs3hxUu4hjSWV5wlMXmDJu5xMAkzvM=' # Secret text generate while setting up the server
           fork_repo_url: ${{ github.event.pull_request.head.repo.full_name }}
           GITHUB_TOKEN: ${{ github.token }}
+          github_event: ${{ github.event }}
