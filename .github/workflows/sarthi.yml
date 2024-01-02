@@ -1,7 +1,7 @@
 name: Sarthi Preview Environments
 on:
   pull_request:
-    types: [ opened, closed, reopened ]
+    types: [ opened, closed, reopened, synchronized ]
   push:
   # delete preview environments when branches are deleted
   delete:
